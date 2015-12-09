@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{2FC0BA7C-A659-4511-9C3D-A7C48C67AE7C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ClangServer</RootNamespace>
+    <AssemblyName>ClangServer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+    <Commandlineparameters>~/devel/cuboxi4/gzOS -m32 -Iinclude -Ibuild -include build/config.h -Wall -Werror -I/usr/lib/gcc/x86_64-unknown-linux-gnu/5.2.0/include/ -std=c++14</Commandlineparameters>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="Execute" command="${TargetFile} ~/devel/cuboxi4/gzOS -m32 -Iinclude -Ibuild -include build/config.h -Wall -Werror -I/usr/lib/gcc/x86_64-unknown-linux-gnu/5.2.0/include/ -std=c++14" workingdir="${TargetDir}" externalConsole="True" pauseExternalConsole="True" />
+      </CustomCommands>
+    </CustomCommands>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Common.Logging.Core">
+      <HintPath>..\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>..\packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="ClangSharp">
+      <HintPath>..\packages\clang.sharp.3.6.2\lib\net40\ClangSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="NHttp">
+      <HintPath>..\packages\NHttp.0.1.9.0\lib\net20\NHttp.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ClangServer.cs" />
+    <Compile Include="ClangCompletionResult.cs" />
+    <Compile Include="RouteAttribute.cs" />
+    <Compile Include="BaseServer.cs" />
+    <Compile Include="CodeCompletionRequest.cs" />
+    <Compile Include="CodeCompletionResponse.cs" />
+    <Compile Include="ClangDiagnosticResult.cs" />
+    <Compile Include="DefinitionPositionRequest.cs" />
+    <Compile Include="DefinitionPositionResponse.cs" />
+    <Compile Include="ExpressionTypeResponse.cs" />
+    <Compile Include="ExpressionTypeRequest.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\clang.sharp.3.6.2\build\net40\clang.sharp.targets" Condition="Exists('..\packages\clang.sharp.3.6.2\build\net40\clang.sharp.targets')" />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
